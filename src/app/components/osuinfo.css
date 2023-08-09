@@ -1,0 +1,11 @@
+.stats > * , .records > *, .center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.stats span {
+    font-weight: bold;
+    margin-top: auto;
+}
