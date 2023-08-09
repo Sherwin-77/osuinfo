@@ -1,17 +1,7 @@
-"use client"
-
-import localFont from 'next/font/local'
-import { useEffect } from 'react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'react-toastify/dist/ReactToastify.css'
-import { ToastContainer } from 'react-toastify'
-
-const pageFont = localFont({ src: './fonts/Helvetica/Helvetica.ttf' })
-
+import ClientRootLayout from "./rootlayout"
 
 export const metadata = {
+  title: "osu! Info",
   favicon: "/favicon.ico"
   // favicon: [
   //   {
@@ -90,44 +80,14 @@ export const metadata = {
   // ]
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    require("bootstrap/dist/js/bootstrap")
-  })
-
-  const pathname = usePathname()
-  const navLinks = [
-    { href: "/", name: "Home" },
-    { href: "/about", name: "About" }
-  ]
-
-  const navItem = navLinks.map((link) => {
-    const isActive = pathname === link.href
-
-    return (
-      <li className="nav-item me-3">
-
-        <Link
-          className={isActive ? "nav-link active" : "nav-link"}
-          href={link.href}
-          key={link.name}
-        >
-          {link.name}
-        </Link>
-      </li>
-    )
-  })
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en" data-bs-theme="dark">
-      <body className={pageFont.className}>
-        <header className="navbar navbar-expand-lg bg-body-tertiary mb-3">
-          <ul className="navbar-nav my-1 ms-auto">
-            {navItem}
-          </ul>
-        </header>
-        {children}
-        <ToastContainer />
-      </body>
-    </html>
+    <ClientRootLayout>
+      {children}
+    </ClientRootLayout>
   )
 }
