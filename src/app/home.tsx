@@ -14,7 +14,7 @@ export default function Home() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     if (!(uid || username)) {
-      toast("At least uid or username is required", { autoClose: 3000, type: "error" })
+      toast("At least uid or username is required", { autoClose: 3000, type: "error" , theme: "dark", pauseOnHover: false})
       return
     }
     const endpoint = "/api/search"
@@ -28,7 +28,18 @@ export default function Home() {
       },
       body: JSON.stringify({ user: user.toString(), key: key })
     }
-    const response = await fetch(endpoint, options)
+    const response = await toast.promise(
+      fetch(endpoint, options),
+      {
+        pending: "Searching user",
+        error: "Something wrong. Try again later"
+      },
+      {theme: "dark", position: "top-center", autoClose: 4000, pauseOnHover: false}
+    )
+    if(!response.ok){
+      if(response.status == 404) toast("User not found", { autoClose: 4000, type: "error", theme: "dark", position: "top-center", pauseOnHover: false})
+      return
+    }
     const res = await response.json()
     setInfo(res)
   }

@@ -13,6 +13,7 @@ export class TokenHandler {
     }
 
     protected async prepareToken() {
+        console.log("New token created")
         const options = {
             method: "POST",
             headers: {
@@ -34,6 +35,7 @@ export class TokenHandler {
     }
 
     protected async refreshToken() {
+        console.log("Token refreshed")
         const options = {
             method: "POST",
             headers: {

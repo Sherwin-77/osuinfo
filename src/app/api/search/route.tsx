@@ -15,7 +15,10 @@ export async function POST(request: NextRequest){
     const url = new URL(`${process.env.API_URL}/users/${req.user}`)
     url.searchParams.append("key", req.key)
     const response = await fetch(url, {headers: await handler.getHeaders()})
+    if(!response.ok) {
+        if(response.status == 404) return NextResponse.json("Not found", {status: 404})
+        return NextResponse.json("Internal server error", {status: 500})
+    }
     const res = await response.json()
-    if(!response.ok) return NextResponse.json("Internal server error", {status: 500})
     return NextResponse.json(res, {status: 200})
 }
