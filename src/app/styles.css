@@ -1,0 +1,85 @@
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes animatedgradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes rotate-gradient {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+
+.gradient-button {
+    position: relative;
+    /* overflow: hidden; */
+    padding: .5em .9em;
+    border: none;
+    border-radius: .5em;
+    background-clip: padding-box;
+}
+
+.gradient-button::before {
+    content: "";
+    position: absolute;
+    top: -.05em;
+    right: -.05em;
+    bottom: -.05em;
+    left: -.05em;
+    z-index: -1;
+    border-radius: inherit;
+    margin: -.1em;
+
+    background: rgb(247, 3, 3);
+    background: linear-gradient(45deg, rgba(247, 3, 3, 1) 10%, rgba(250, 248, 0, 1) 50%, rgba(0, 124, 255, 1) 90%);
+    animation: animatedgradient 3s ease alternate infinite;
+    background-size: 300% 300%;
+}
+
+.gradient-button:hover {
+    overflow: hidden;
+    background-color: transparent;
+    border: solid -.2em transparent;
+    color: black;
+}
+
+.gradient-button:hover::after {
+    content: '';
+    display: block;
+    z-index: -1;
+    position: absolute;
+    top: -5rem;
+    right: -5em;
+    bottom: -5em;
+    left: -5em;
+    background-image: linear-gradient(45deg, rgba(247, 3, 3, 1) 10%, rgba(250, 248, 0, 1) 50%, rgba(0, 124, 255, 1) 90%);
+    animation: rotate-gradient linear 1s infinite;
+}
+
+
+.glow {
+    border: 2px solid lightgray;
+    border-radius: 7px;
+}
+
+.glow:focus { 
+    outline: none;
+    border-color: lightblue;
+    box-shadow: 0 0 .5em lightblue;
+}

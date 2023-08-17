@@ -4,9 +4,11 @@ import localFont from 'next/font/local'
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { ToastContainer } from 'react-toastify'
+
 import 'bootstrap/dist/css/bootstrap.css'
 import 'react-toastify/dist/ReactToastify.css'
-import { ToastContainer } from 'react-toastify'
+import "./styles.css"
 
 const pageFont = localFont({ src: './fonts/Helvetica/Helvetica.ttf' })
 
@@ -43,9 +45,10 @@ export default function ClientRootLayout({ children }: { children: React.ReactNo
             {navItem}
           </ul>
         </header>
-        {children}
         <ToastContainer />
+        {children}
       </body>
     </html>
   )
 }
+
