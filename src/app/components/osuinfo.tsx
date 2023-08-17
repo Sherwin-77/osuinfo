@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { type User } from "../../../osutype";
+import { type User } from "@/@types/osu";
 
 import "./osuinfo.css"
-import { CSSProperties } from "react";
+import { useEffect } from "react";
 
 interface Props {
     data: User
@@ -10,10 +10,14 @@ interface Props {
 
 export default function OsuInfo(props: Props) {
     const data = props.data
+    let endRef: HTMLElement | null = null
+    useEffect(() => {
+        endRef?.scrollIntoView({behavior: "smooth"})
+      }, []);
     return (
         <div className="container bg-body-tertiary p-3 m-3">
             <h3>Profile</h3>
-            <div className="d-flex mb-3">
+            <div className="d-flex mb-3" ref={(el) => endRef = el}>
                 <Image src={data.avatar_url} width={200} height={200} alt="avatar" className="img-thumbnail" />
                 <div style={{ alignSelf: "flex-end", padding: "12px" }}>
                     <h4>{data.username}</h4>
