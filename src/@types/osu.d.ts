@@ -1,5 +1,12 @@
 export type GameMode = "fruits" | "mania" | "osu" | "taiko"
 
+export type UserBadge = {
+    awarded_at: number;
+    description: string;
+    image_url: string;
+    url: string;
+}
+
 export interface UserStatistic {
     count_100: number;
     count_300: number;
@@ -49,6 +56,7 @@ export interface User {
     beatmap_playcounts_count?: number;
     statistics: UserStatistic;
 
+    badges: UserBadge[];
     discord: string?;
     has_supported: bool;
     interests: string?;

@@ -2,27 +2,28 @@ import Image from "next/image";
 import { type User } from "@/@types/osu";
 
 import "./osuinfo.css"
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 
 interface Props {
-    data: User
+    data?: User
 }
 
-export default function OsuInfo(props: Props) {
+const OsuInfo = memo(function OsuComponent(props: Props) {
     const data = props.data
-    let endRef: HTMLElement | null = null
+    if(!data) return
+    let endRef: HTMLElement | undefined = undefined
     useEffect(() => {
-        endRef?.scrollIntoView({behavior: "smooth"})
-      }, []);
+        endRef?.scrollIntoView({ behavior: "smooth" })
+    }, endRef);
     return (
         <div className="container bg-body-tertiary p-3 m-3">
             <h3>Profile</h3>
-            <div className="d-flex mb-3" ref={(el) => endRef = el}>
-                <Image src={data.avatar_url} width={200} height={200} alt="avatar" className="img-thumbnail" />
+            <div className="d-flex mb-3" ref={(el) => el ? endRef = el : ""}>
+                <Image src={data.avatar_url} height={200} width={200} alt="avatar" className="img-thumbnail" />
                 <div style={{ alignSelf: "flex-end", padding: "12px" }}>
                     <h4>{data.username}</h4>
                     <div className="d-flex mt-3">
-                        <Image alt="country" width={50} height={0} style={{ height: "100%" }} src={`/flags/${data.country_code}.svg`}></Image>
+                        <Image alt="country" width={50} height={0} style={{ height: "auto" }} src={`/flags/${data.country_code}.svg`}></Image>
                         <span className="ms-2 center" >{data.country?.name}</span>
                     </div>
                 </div>
@@ -39,10 +40,13 @@ export default function OsuInfo(props: Props) {
                     </div>
                 </div>
             </div>
+            {data.badges.map((it) => {
+                return <Image key={it.description} src={it.image_url} alt={it.description} width={500} height={80} style={{width: "auto"}} />
+            })}
             <hr />
             <dl className="row mb-3">
                 <dt className="col-sm-2">Supporter</dt>
-                <dd className="col-sm-10">: {data.is_supporter ?? "When"} {data.has_supported ? "(Has supported)" : "(Never supported)"}</dd>
+                <dd className="col-sm-10">: {data.is_supporter ? "Yes" : "No"} {data.has_supported ? "(Has supported)" : "(Never supported)"}</dd>
                 <dt className="col-sm-2">Joined since</dt>
                 <dd className="col-sm-10">: {new Date(data.join_date).toDateString()}</dd>
                 <dt className="col-sm-2">Playmode</dt>
@@ -95,12 +99,17 @@ export default function OsuInfo(props: Props) {
                         </div>
                     </div>
                 </div>
+                <div className="col-md-12 my-3"></div>
                 <hr />
-                <div className="col-sm-3"><b>PP: </b></div>
-                <div className="col-sm-3">{data.statistics.pp}</div>
-                <div className="col-sm-3"><b>Global Rank: </b></div>
-                <div className="col-sm-3">{data.statistics.global_rank}</div>
+                <div className="col-sm-2 mb-3"><b>PP: </b></div>
+                <div className="col-sm-2">{data.statistics.pp}</div>
+                <div className="col-sm-2"><b>Global Rank: </b></div>
+                <div className="col-sm-2">{data.statistics.global_rank}</div>
+                <div className="col-sm-2"><b>Accuracy:</b></div>
+                <div className="col-sm-2">{data.statistics.hit_accuracy}%</div>
             </div>
         </div>
     )
-}
+})
+
+export default OsuInfo;

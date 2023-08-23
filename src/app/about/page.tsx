@@ -1,5 +1,5 @@
 export const metadata = {
-    title: "osu! Info - About",
+    title: "About",
     description: "About osu! info website",
 }
 

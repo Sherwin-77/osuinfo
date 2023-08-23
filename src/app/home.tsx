@@ -47,11 +47,6 @@ export default function Home() {
     const res = await response.json()
     setInfo(res)
   }
-  const infoComponent = (() => {
-    if (!info) return null
-    const inf = info as User
-    return (<OsuInfo data={inf} />)
-  })()
 
   return (
     <main className="d-flex justify-content-center align-items-center flex-column">
@@ -74,7 +69,7 @@ export default function Home() {
         </form>
       </div>
       {loading ? <Loading /> : null}
-      {infoComponent}
+      <OsuInfo data={info as User} />
     </main>
   )
 }
