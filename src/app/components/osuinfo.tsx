@@ -9,12 +9,12 @@ interface Props {
 }
 
 const OsuInfo = memo(function OsuComponent(props: Props) {
-    const data = props.data
-    if(!data) return
     let endRef: HTMLElement | undefined = undefined
     useEffect(() => {
         endRef?.scrollIntoView({ behavior: "smooth" })
-    }, endRef);
+    }, [endRef]);
+    const data = props.data
+    if(!data) return
     return (
         <div className="container bg-body-tertiary p-3 m-3">
             <h3>Profile</h3>
