@@ -1,8 +1,8 @@
 "use client"
-import { type Component, FormEvent, useState, useEffect } from 'react'
+import { type Component, FormEvent, useState, useEffect, DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_FORM_ACTIONS } from 'react'
 import { toast } from 'react-toastify'
 
-import { type User } from "@/@types/osu";
+import { OsuWebData, type User } from "@/@types/osu";
 import { type CacheContextType } from '@/@types/cache';
 
 import './styles.css'
@@ -69,7 +69,7 @@ export default function Home() {
         </form>
       </div>
       {loading ? <Loading /> : null}
-      <OsuInfo data={info as User} />
+      <OsuInfo data={info as OsuWebData} />
     </main>
   )
 }
