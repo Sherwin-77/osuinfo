@@ -1,5 +1,5 @@
 "use client"
-import { type Component, FormEvent, useState } from 'react'
+import { type Component, FormEvent, useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 
 import { type User } from "@/@types/osu";
@@ -51,7 +51,7 @@ export default function Home() {
   return (
     <main className="d-flex justify-content-center align-items-center flex-column">
       <h1>Get your osu! information</h1>
-      <div className="container" style={{ width: "20vw" }}>
+      <div className="container" style={{ width: "30%" }}>
         <div className="center my-3">
           <Image src="./osu!.svg" alt="Logo" width={0} height={0} style={{ width: "50%", height: "auto" }} />
         </div>
