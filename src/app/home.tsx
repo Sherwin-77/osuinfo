@@ -1,5 +1,5 @@
 "use client"
-import { type Component, FormEvent, useState, useEffect, DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_FORM_ACTIONS } from 'react'
+import { type Component, FormEvent, useState} from 'react'
 import { toast } from 'react-toastify'
 
 import { OsuWebData, type User } from "@/@types/osu";
